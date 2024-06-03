@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int $gross_total
- * @property int $promotion_total
+ * @property int $discount_total
  * @property int $net_total
  */
 class Basket extends BaseModel
@@ -16,7 +17,7 @@ class Basket extends BaseModel
 
     protected $fillable = [
         'gross_total',
-        'promotion_total',
+        'discount_total',
         'net_total',
     ];
 
@@ -35,9 +36,12 @@ class Basket extends BaseModel
     public function calculateBasket()
     {
         $grossTotal = 0;
+
+        $tickets = $this->tickets();
+
         /** @var Ticket $ticket */
-        foreach ($this->tickets() as $ticket) {
-            $grossTotal += $ticket->base_price;
+        foreach ($tickets as $ticket) {
+            $grossTotal += $ticket->ticketType()->price;
             $extras = $ticket->ticketExtras();
 
             /** @var TicketExtra $extra */
@@ -45,11 +49,37 @@ class Basket extends BaseModel
                 $grossTotal += $extra->ticketExtraType()->price;
             }
         }
+
         $this->gross_total = $grossTotal;
-        $this->net_total = $grossTotal;
+
+        $this->applyDiscounts(
+            $tickets->count(),
+        );
+
+        $this->net_total = $grossTotal - $this->discount_total;
 
         $this->save();
 
         return $this;
+    }
+
+    public function applyDiscounts(
+        int $ticketsCount
+    ) {
+        $discountTotal = 0;
+        /** @var TicketType $concessionTicket */
+        $concessionTicket = TicketType::query()
+            ->find(TicketType::CONCESSION);
+
+        // HANDLE THREE FOR THURSDAY
+        $test = 1;
+        if (Carbon::now()->dayOfWeek() === 1 && $ticketsCount > 2) {
+            for ($i = 0; $i < $ticketsCount; $i += 3) {
+                $discountTotal += ($concessionTicket->price * 2);
+            }
+        }
+
+        $this->discount_total = $discountTotal;
+        $this->save();
     }
 }

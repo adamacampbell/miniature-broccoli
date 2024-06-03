@@ -16,7 +16,7 @@ class BasketSeeder extends Seeder
     {
         Basket::factory(10)->create()->each(function (Basket $basket) {
 
-            Ticket::factory(100)->create([
+            Ticket::factory(rand(1, 10))->create([
                 'basket_id' => $basket->id
             ])->each(function (Ticket $ticket) {
 

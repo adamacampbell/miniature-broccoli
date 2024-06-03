@@ -125,6 +125,7 @@
       <path value="$PROJECT_DIR$/application/vendor/psr/event-dispatcher" />
       <path value="$PROJECT_DIR$/application/vendor/mockery/mockery" />
       <path value="$PROJECT_DIR$/application/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/application/vendor/laravel/sanctum" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

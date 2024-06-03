@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Mock;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Ticket;
 use Illuminate\Database\Seeder;
 
 class TicketSeeder extends Seeder
@@ -12,6 +12,6 @@ class TicketSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Ticket::factory(100)->create();
     }
 }

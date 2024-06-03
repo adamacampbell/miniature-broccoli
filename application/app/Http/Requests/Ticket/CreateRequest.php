@@ -11,7 +11,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'ticket_type_id' => [
+                'required',
+                'exists:ticket_types,id',
+            ],
+            'discount' => [
+                'numeric'
+            ]
         ];
     }
 }

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TicketType;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStandardTicketRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class StoreStandardTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'required',
+                'unique:ticket_types,name'
+            ],
+            'price' => [
+                'required',
+                'numeric'
+            ]
         ];
     }
 }

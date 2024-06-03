@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,16 @@ Route::group([
  |-----------------------------------------------------------------------------
  | Routes dedicated to models
  */
+Route::group([
+    'prefix' => 'ticket-type'
+], function () {
+    Route::get('', [TicketTypeController::class, 'index'])->name('ticket-type.index');
+    Route::get('{ticketType}', [TicketTypeController::class, 'show'])->name('ticket-type.show');
+    Route::post('', [TicketTypeController::class, 'create'])->name('ticket-type.create');
+    Route::patch('{ticketType}', [TicketTypeController::class, 'update'])->name('ticket-type.update');
+    Route::delete('{ticketType}', [TicketTypeController::class, 'delete'])->name('ticket-type.delete');
+});
+
 Route::group([
     'prefix' => 'ticket'
 ], function () {

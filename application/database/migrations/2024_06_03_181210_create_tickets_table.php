@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
 
-            $table->decimal('base_price');
+            $table->foreignId('ticket_type_id')
+                ->constrained('ticket_types')
+                ->onDelete('cascade');
             $table->decimal('discount')
                 ->default(0);
 

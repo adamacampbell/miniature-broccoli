@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketExtraTypeController;
 use App\Http\Controllers\TicketTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,4 +47,14 @@ Route::group([
     Route::post('', [TicketController::class, 'create'])->name('ticket.create');
     Route::patch('{ticket}', [TicketController::class, 'update'])->name('ticket.update');
     Route::delete('{ticket}', [TicketController::class, 'delete'])->name('ticket.delete');
+});
+
+Route::group([
+    'prefix' => 'ticket-extra-type'
+], function () {
+    Route::get('', [TicketExtraTypeController::class, 'index'])->name('ticket-extra-type.index');
+    Route::get('{ticketExtraType}', [TicketExtraTypeController::class, 'show'])->name('ticket-extra-type.show');
+    Route::post('', [TicketExtraTypeController::class, 'create'])->name('ticket-extra-type.create');
+    Route::patch('{ticketExtraType}', [TicketExtraTypeController::class, 'update'])->name('ticket-extra-type.update');
+    Route::delete('{ticketExtraType}', [TicketExtraTypeController::class, 'delete'])->name('ticket-extra-type.delete');
 });

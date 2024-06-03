@@ -26,9 +26,10 @@ class CreateRequest extends FormRequest
                 'required',
                 'exists:ticket_types,id',
             ],
-            'discount' => [
-                'numeric'
-            ]
+            'basket_id' => [
+                'required',
+                'exists:baskets,id',
+            ],
         ];
     }
 }

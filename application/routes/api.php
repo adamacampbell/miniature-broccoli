@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketExtraController;
@@ -68,4 +69,11 @@ Route::group([
     Route::post('', [TicketExtraController::class, 'create'])->name('ticket-extra.create');
     Route::patch('{ticketExtra}', [TicketExtraController::class, 'update'])->name('ticket-extra.update');
     Route::delete('{ticketExtra}', [TicketExtraController::class, 'delete'])->name('ticket-extra.delete');
+});
+
+Route::group([
+    'prefix' => 'basket'
+], function () {
+    Route::get('', [BasketController::class, 'index'])->name('basket.index');
+    Route::get('calculate-basket/{basket}', [BasketController::class, 'calculateBasket'])->name('basket.calculate-basket');
 });

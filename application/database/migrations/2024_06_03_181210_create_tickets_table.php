@@ -17,8 +17,9 @@ return new class extends Migration
             $table->foreignId('ticket_type_id')
                 ->constrained('ticket_types')
                 ->onDelete('cascade');
-            $table->decimal('discount')
-                ->default(0);
+            $table->foreignId('basket_id')
+                ->constrained('baskets')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

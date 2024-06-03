@@ -2,37 +2,21 @@
 
 namespace App\Models;
 
-use App\Interfaces\TicketInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property integer $base_price
- * @property integer $discount
+ * @property int $ticket_type_id
+ * @property int $basket_id
  */
-class Ticket extends BaseModel implements TicketInterface
+class Ticket extends BaseModel
 {
     use HasFactory;
 
     protected $fillable = [
         'ticket_type_id',
-        'discount',
+        'basket_id',
     ];
-
-    public function calculateGrossPrice(): int
-    {
-        // TODO: Implement calculateGrossPrice() method.
-    }
-
-    public function calculateSavings(): int
-    {
-        // TODO: Implement calculateSavings() method.
-    }
-
-    public function calculateNetPrice(): int
-    {
-        // TODO: Implement calculateNetPrice() method.
-    }
 
     /*
      * RELATIONSHIPS

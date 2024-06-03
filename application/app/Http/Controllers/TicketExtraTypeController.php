@@ -15,7 +15,7 @@ class TicketExtraTypeController extends BaseCrudController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create a new resource.
      */
     public function create(
         CreateRequest $request
@@ -42,7 +42,7 @@ class TicketExtraTypeController extends BaseCrudController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource.
      */
     public function update(
         UpdateRequest $request,
@@ -66,7 +66,7 @@ class TicketExtraTypeController extends BaseCrudController
         $ticketExtraType->delete();
 
         return response([
-            'message' => 'TicketType deleted',
+            'message' => 'TicketExtraType deleted',
             'data' => $ticketExtraType,
         ], 200);
     }

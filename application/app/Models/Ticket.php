@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Interfaces\TicketInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $base_price
@@ -42,5 +42,11 @@ class Ticket extends BaseModel implements TicketInterface
         /** @var TicketType */
         return $this->belongsTo(TicketType::class)
             ->first();
+    }
+
+    public function ticketExtras(): Collection
+    {
+        return $this->hasMany(TicketExtra::class)
+            ->get();
     }
 }

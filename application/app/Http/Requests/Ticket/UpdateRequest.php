@@ -25,8 +25,8 @@ class UpdateRequest extends FormRequest
             'ticket_type_id' => [
                 'exists:ticket_types,id',
             ],
-            'discount' => [
-                'numeric'
+            'basket_id' => [
+                'exists:baskets,id',
             ]
         ];
     }

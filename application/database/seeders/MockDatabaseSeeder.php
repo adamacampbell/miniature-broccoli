@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Mock\BasketSeeder;
 use Database\Seeders\Mock\TicketSeeder;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,6 @@ class MockDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(TicketSeeder::class);
+        $this->call(BasketSeeder::class);
     }
 }

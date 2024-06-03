@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_extra_types', function (Blueprint $table) {
+        Schema::create('baskets', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
-            $table->decimal('price', 10, 2);
+            $table->decimal('gross_total', 10, 2);
+            $table->decimal('discount_total', 10, 2);
+            $table->decimal('net_total', 10, 2);
 
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket_extra_types');
+        Schema::dropIfExists('baskets');
     }
 };

@@ -1,0 +1,62 @@
+version: "3.8"
+
+networks:
+  cinema-api:
+    driver: bridge
+    external: false
+
+services:
+  # APPLICATION SERVICE
+  cinema-api:
+    container_name: cinema-api
+    image: cinema-api
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: docker/services/api/Dockerfile
+      args:
+        - BUILD_ENV=local
+    environment:
+      - PHP_IDE_CONFIG=serverName=api.cinema.local
+    volumes:
+      - ./application:/var/www/cinema-api
+    networks:
+      - cinema-api
+    depends_on:
+      - cinema-nginx
+      - cinema-mysql
+
+  # NGINX SERVICE
+  cinema-nginx:
+    container_name: cinema-nginx
+    image: cinema-nginx
+    restart: unless-stopped
+    build:
+      context: ./docker/services/nginx
+    working_dir: /var/www
+    environment:
+      - VIRTUAL_HOST=api.cinema.local
+    volumes:
+      - ./application:/var/www
+    networks:
+      - cinema-api
+    ports:
+      - "8060:80"
+      - "8061:8080"
+
+  # MAIN DB SERVICE
+  cinema-mysql:
+    container_name: cinema-mysql
+    image: mysql/mysql-server:latest
+    restart: unless-stopped
+    volumes:
+      - ./docker/services/mysql/volumes/data:/var/lib/data:delegated
+    networks:
+      - cinema-api
+    environment:
+      MYSQL_DATABASE: cinema_api
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    ports:
+      - "3312:3306"

@@ -42,6 +42,7 @@ Baskets are the grouping of purchased Tickets.
 4. Better storage of monetary values, I just went for a quick implementation which is prone to rounding inaccuracies.
 5. CI/CD pipeline to automate deployments and running tests against PRs.
 6. PR template to better format PRs and introduce consistency.
+7. Better seperation of concerns. My business logic is mostly in the Model and Controller. Ideally this would be extracted into a Service. 
 
 ### Additional Comments
 I just want to take the time to thank you for giving me the opportunity to participate in this coding test. While I was short on time, I gave it my best shot. If you have any questions then please feel free to reach out to me.
